@@ -29,9 +29,15 @@ primeSieve' y (x:xs)
     | (fromIntegral x) > sqrt (fromIntegral y) = x:xs
     | otherwise = x:(primeSieve' y $ filter (\y -> y `mod` x /= 0) xs)
 
+--Wrapper for the following function, initializing a 2
 primeFactors :: (Integral a) => a -> [a]
 primeFactors x = primeFactors' x 2
 
+--A variant on the prime checker, returning the prime factors of the given number
+--Begins searching for factors from 2. The first factor found is guaranteed to be prime
+--Once it is found, find the prime factors of that factor's complement
+--If no factors are found before the square root of the number being checked, it itself is prime,
+--And therefore its only prime factor
 primeFactors' :: (Integral a) => a -> a -> [a]
 primeFactors' x y
     | fromIntegral y > sqrt (fromIntegral x) = [x]

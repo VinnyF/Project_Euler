@@ -1,7 +1,6 @@
 module Prime (
     isPrime,
-    primeSieve,
-    primeFactors
+    primeSieve
 ) where
 
 --Recursive part of the prime checker
@@ -28,12 +27,3 @@ primeSieve' _ (x:[]) = [x]
 primeSieve' y (x:xs)
     | (fromIntegral x) > sqrt (fromIntegral y) = x:xs
     | otherwise = x:(primeSieve' y $ filter (\y -> y `mod` x /= 0) xs)
-
-primeFactors :: (Integral a) => a -> [a]
-primeFactors x = primeFactors' x 2
-
-primeFactors' :: (Integral a) => a -> a -> [a]
-primeFactors' x y
-    | fromIntegral y > sqrt (fromIntegral x) = [x]
-    | x `mod` y == 0 = y:primeFactors' (x `div` y) 2
-    | otherwise = primeFactors' x (y+1)
